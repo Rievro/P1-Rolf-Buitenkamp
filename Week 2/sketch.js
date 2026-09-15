@@ -92,7 +92,46 @@ function draw() {
  
  rect(800, 800, 100, 10, 5)
 
+
+ //stoplight//
+strokeWeight(1)
+fill('grey');
+  rect(650, 640, 10, 60);
+  rect(642.5, 570, 25, 100)
+  if (lightstate === 'red') {
+    fill('red')
+
+  }
+  else
+  {
+    fill('grey')
+  }
+ // rood
+  ellipse(655, 650, 20, 20);
+  if (lightstate === 'orange') {
+    fill('orange')
+
+  }
+  else
+  {
+    fill('grey')
+  }
+ // orange
+  ellipse(655, 620, 20, 20);
+  if (lightstate === 'green') {
+    fill('green')
+
+  }
+  else
+  {
+    fill('grey')
+  }
+ // groen
+  ellipse(655, 590, 20, 20);
  // cars
+
+
+ strokeWeight(0)
 fill('red')
 rect(car1 +85, 710, 130, 50, 5)
 rect(car1 + 85, 690, 120, 50, 5)
@@ -115,17 +154,8 @@ ellipse(car1 + 190, 860, 25, 25)
   fill('green');
   ellipse(425, 775, 122, 122);
   
-strokeWeight(1)
-fill('grey');
-  rect(650, 640, 10, 60);
-  rect(642.5, 570, 25, 100)
-  fill('red');
-  ellipse(655, 650, 20, 20);
-  fill('green');
-  ellipse(655, 590, 20, 20);
-  fill('orange');
-  ellipse(655, 620, 20, 20);
-   //moet nog:  stoplight,//
+
+   
 
 
 
@@ -133,6 +163,22 @@ fill('grey');
 
 function keyPressed() {
   if (keyCode === ENTER) {
-    carspeed *= 0.5;
-  }
-}
+    
+     if (lightstate == 'green') {
+    lightstate = 'orange'
+    carspeed *= 0.5
+     }
+     else if (lightstate == 'orange') {
+    lightstate = 'red'
+    carspeed *= 0
+     }
+    else if (lightstate == 'red'){
+      lightstate = 'green'
+      carspeed = 2.2
+    }
+    
+    
+    }
+    }
+
+
