@@ -2,11 +2,14 @@ let cloudX = 0;
 let cloud1 = 0;
 let sun1 = 0;
 let car1= 0;
+let carspeed = 2.2;
+let lightstate = 'green'
 function setup() {
   createCanvas(1000, 900);
 }
 
 function draw() {
+   
   background('lightblue');
   fill('grey');
   strokeWeight(0)
@@ -47,11 +50,14 @@ function draw() {
   if (sun1 > 1000) {
     sun1 = -250
   }
-
-   let pulse = 1 + sin(frameCount * 0.05) * 1;
-   fill('orange')
+ // sunpulse//
+   let pulse = 1 + sin(frameCount * 0.1) * 1;
+  fill(255, 165, 0, 128)
    ellipse(sun1 + 50, 75, 80 * pulse);
-  let pulse1 = 1 - sin(frameCount * 0.05) * 1;
+  pulse1 = 1 + sin(frameCount * 0.2) * 1;
+
+   pulse1 = 1 + sin(frameCount * 0.15) * 1;
+   pulse1 = 1 + sin(frameCount / 111.25) * 1;
     
   ellipse(sun1 + 50, 75, 80 * pulse1);
 
@@ -60,7 +66,7 @@ function draw() {
 
   
 //clouds
-    fill('lightgrey')
+    fill(195, 195, 195, 150)
    ellipse(cloudX + 200, 112, 110, 90);
   ellipse(cloudX + 250, 120, 130, 100);
   ellipse(cloudX + 300, 101, 110, 90);
@@ -68,7 +74,7 @@ function draw() {
  ellipse(cloud1 + 750, 167, 110, 90);
   ellipse(cloud1 + 800, 170, 130, 100);
   ellipse(cloud1 + 850, 190, 110, 90);
-  fill('white');
+  fill(255, 255, 255, 150);
   ellipse(cloudX + 200, 122, 100, 80);
   ellipse(cloudX + 250, 130, 120, 90);
   ellipse(cloudX + 300, 111, 100, 80);
@@ -77,8 +83,7 @@ function draw() {
   ellipse(cloud1 + 800, 180, 120, 90);
   ellipse(cloud1 + 850, 200, 100, 80);
 
-
-  
+  // road part 2
   fill('lightgrey');
   rect(400, 800, 100, 10, 5)
    rect(200, 800, 100, 10, 5)
@@ -87,15 +92,47 @@ function draw() {
  
  rect(800, 800, 100, 10, 5)
 
+ // cars
 fill('red')
-rect(car1 +85, 750, 130, 50, 5)
-rect(car1 + 100, 725, 100, 50, 5)
+rect(car1 +85, 710, 130, 50, 5)
+rect(car1 + 85, 690, 120, 50, 5)
 fill('black')
-ellipse(car1 + 110, 800, 25, 25)
-ellipse(car1 + 190, 800, 25, 25)
-
- car1 += 55.55;
+ellipse(car1 + 110, 760, 25, 25)
+ellipse(car1 + 190, 760, 25, 25)
+fill('blue')
+rect(car1 +85, 810, 130, 50, 5)
+rect(car1 + 85, 790, 120, 50, 5)
+fill('black')
+ellipse(car1 + 110, 860, 25, 25)
+ellipse(car1 + 190, 860, 25, 25)
+ car1 += carspeed;
   if (car1 > 1000) {
     car1 = -200;
+  }
+
+   fill('brown');
+  rect(415, 775, 25, 250);
+  fill('green');
+  ellipse(425, 775, 122, 122);
+  
+strokeWeight(1)
+fill('grey');
+  rect(650, 640, 10, 60);
+  rect(642.5, 570, 25, 100)
+  fill('red');
+  ellipse(655, 650, 20, 20);
+  fill('green');
+  ellipse(655, 590, 20, 20);
+  fill('orange');
+  ellipse(655, 620, 20, 20);
+   //moet nog:  stoplight,//
+
+
+
+}
+
+function keyPressed() {
+  if (keyCode === ENTER) {
+    carspeed *= 0.5;
   }
 }
