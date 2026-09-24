@@ -2,6 +2,8 @@ let currentPlayer = 1 // 1 red, 2 blue
 let gamestate = 'playing'
 let board = [0, 0, 0, 0, 0, 0, 0, 0, 0] // 0 = not clicked, 1 = red, 2 = blue
 let game_over = false
+let winner = 0;
+
 
 function drawSquare(x, y, index) {
   if (board[index] === 1) {
@@ -40,8 +42,7 @@ function mousePressed() {
     }
   } else if (mouseX > 350 && mouseX < 470 && mouseY > 200 && mouseY < 320 && board[3] === 0) {
     board[3] = currentPlayer;
-    if (currentPlayer === 1) {
-      currentPlayer = 2;
+    if (currentPlayer === 1) {  currentPlayer = 2;
     } else {
       currentPlayer = 1;
     }
@@ -75,15 +76,26 @@ function mousePressed() {
     }
   } else if (mouseX > 500 && mouseX < 620 && mouseY > 500 && mouseY < 620 && board[8] === 0) {
     board[8] = currentPlayer;
-    if (currentPlayer === 1) {
-      currentPlayer = 2;
+    if (currentPlayer === 1) {  currentPlayer = 2;
     } else {
       currentPlayer = 1;
     }
   }
+  console.log(board)
+
+  if(board[0] == board[3] && board[3] == board[6] && board [0] !== 0) {
+ console.log('winner')
+  }
+  if(board[1] == board[2] && board[2] == board[4] && board [0] !== 0) {
+ console.log('winner')
+  }
+  if(board[5] == board[7] && board[7] == board[8] && board [0] !== 0) {
+ console.log('winner')
+  }
 }
 
 function setup() {
+  createCanvas(400, 400);
   createCanvas(900, 900);
 }
 
@@ -97,19 +109,18 @@ function draw() {
 
  //squares
 
-  drawSquare(200, 200, 0);
-  drawSquare(200, 350, 1);
-  drawSquare(350, 350, 2);
-  drawSquare(350, 200, 3);
-  drawSquare(500, 350, 4);
-  drawSquare(350, 500, 5);
-  drawSquare(500, 200, 6);
-  drawSquare(200, 500, 7);
-  drawSquare(500, 500, 8);
+  drawSquare(200, 200, 0); // linksboven 
+  drawSquare(200, 350, 1); // linksmidden
+  drawSquare(350, 350, 2); // midden
+  drawSquare(350, 200, 3); // middenboven
+  drawSquare(500, 350, 4); // middenrechts
+  drawSquare(350, 500, 5); // middenlinks
+  drawSquare(500, 200, 6); // rechtsboven
+  drawSquare(200, 500, 7); // linksonder
+  drawSquare(500, 500, 8); // rechtsonder
 
-  if(board != 0) {
-board = 0
-  }
+ 
 }
 
 
+ 
