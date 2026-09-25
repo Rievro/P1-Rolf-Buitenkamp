@@ -2,7 +2,6 @@ let currentPlayer = 1 // 1 red, 2 blue
 let gameState = 'playing'
 let board = [0, 0, 0, 0, 0, 0, 0, 0, 0] // 0 = not clicked, 1 = red, 2 = blue
 let winPlayer = 0;
-let winner = 0;
 
 
 function drawSquare(x, y, index) {
@@ -18,7 +17,7 @@ function drawSquare(x, y, index) {
 
 function mousePressed() {
   if (gameState !== 'playing') return;
-  // mouse locations === square locations checks // 
+  // mouse locations === square locations checks and curentplayer swaps // 
   if (mouseX > 200 && mouseX < 320 && mouseY > 200 && mouseY < 320 && board[0] === 0) {
     board[0] = currentPlayer;
     if (currentPlayer === 1) {
@@ -83,66 +82,81 @@ function mousePressed() {
       currentPlayer = 1;
     }
   }
-  console.log(board)
 
+  // Checks all winning lines, and then changes gameState to won or a draw. //
   if (board[0] == board[3] && board[3] == board[6] && board[0] !== 0) {
-    console.log('winner1')
     gameState = 'won'
     winPlayer = board[0]
   }
   if (board[1] == board[2] && board[2] == board[4] && board[1] !== 0) {
-    console.log('winner2')
     gameState = 'won'
     winPlayer = board[1]
   }
   if (board[5] == board[7] && board[7] == board[8] && board[5] !== 0) {
-    console.log('winner3')
     winPlayer = board[5]
     gameState = 'won'
   }
   if (board[0] == board[1] && board[1] == board[7] && board[0] !== 0) {
-    console.log('winner4')
     gameState = 'won'
     winPlayer = board[0]
   }
   if (board[2] == board[3] && board[3] == board[5] && board[2] !== 0) {
-    console.log('winner5')
     gameState = 'won'
     winPlayer = board[2]
   }
   if (board[4] == board[6] && board[6] == board[8] && board[4] !== 0) {
-    console.log('winner6')
     gameState = 'won'
     winPlayer = board[4]
   }
   if (board[0] == board[2] && board[2] == board[8] && board[0] !== 0) {
-    console.log('winner7')
     gameState = 'won'
     winPlayer = board[0]
   }
   if (board[2] == board[6] && board[6] == board[7] && board[2] !== 0) {
-    console.log('winner8')
     gameState = 'won'
     winPlayer = board[2]
   }
+console.log(board)
+   // checks for a draw//
   if (board[0] !== 0 && board[1] !== 0 && board[2] !== 0 && board[3] !== 0 && board[4] !== 0 && board[5] !== 0 && board[6] !== 0 && board[7] !== 0 && board[8] !== 0 && winPlayer === 0) {
     gameState = 'draw'
     winPlayer = 'draw'
   }
 }
+// restarts the game iff function is triggered, setting all of them original states. // 
+function restartGame() {
+  currentPlayer = 1;
+  gameState = 'playing';
+  board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  winPlayer = 0;
+  winner = 0;
+}
 
 function setup() {
-  createCanvas(400, 400);
-  createCanvas(900, 900);
+  createCanvas(900, 900); // canvas. // 
+  let button = createButton('click to restart'); // makes a button that lets u restart the game.
+  button.position(225, 650); // button pos
+  button.size(400, 100); // button size
+  button.mousePressed(restartGame); // the buttons function
 }
 
 function draw() {
-  background(220);
-  stroke('black');
-  strokeWeight(20);
-  fill('darkgrey');
-  square(195, 190, 430, 5);
-  strokeWeight(10);
+  if (currentPlayer == 1) {
+    background(255, 0, 0, 20)
+  } else if (currentPlayer == 2) {
+    background(0, 0, 255, 20)
+  }
+
+
+
+  strokeWeight(20)
+
+  fill('darkgrey')
+  square(195, 190, 430, 5); //outline of the tictactoe board
+  strokeWeight(15);
+
+
+
 
   //squares
 
@@ -156,22 +170,23 @@ function draw() {
   drawSquare(200, 500, 7); // linksonder
   drawSquare(500, 500, 8); // rechtsonder
 
-  if (gameState === 'won') {
-    textSize(40)
-    fill('darkgreen')
-    text('player ' + winPlayer + ' has won!', 250, 150)
 
+  // checks iff gamestate is won or drawn. //
+  textFont('Brush Script MT'); // self-explanitory.
+  if (gameState === 'won') {
+    textSize(60)
+    if (winPlayer === 1) {
+      fill('red')
+    }
+    if (winPlayer === 2) {
+      fill('blue')
+    }
+    text('player ' + winPlayer + ' has won!', 250, 150)
   }
   if (winPlayer === 'draw') {
-    textSize(40)
-    fill('blue')
+    textSize(90)
+    fill('black')
     text('Its a draw', 250, 150)
-    console.log('draw')
   }
-
-
-
-
-
 }
-ff
+
