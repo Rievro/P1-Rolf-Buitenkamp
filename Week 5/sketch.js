@@ -19,6 +19,7 @@ let button1pressed = false;
 let button2pressed = false;
 let button3pressed = false;
 let button4pressed = false;
+let questionAnswered = false;
 let resetTimer = 0;
 let resetter = false;
 let questioncount = 0;
@@ -47,10 +48,22 @@ function draw() {
   background(100);
   textSize(30)
 
-
-
-
+  if (questioncount === 0 ) {
+    button1.hide()
+    button2.hide()
+    button3.hide()
+    button4.hide()
+    textSize(50)
+    text('Click anywhere to begin', 300, 300)
+    return;
+  }
+textSize (20)
   if (questioncount === 1) {
+    button1.show()
+    button2.show()
+    button3.show()
+    button4.show()
+textSize (20)
     text('Which Item do you need to access The Whiteward in silksong', 50, 50)
     button1.html('architects key');
     button2.html('key of apostacy');
@@ -81,47 +94,55 @@ function draw() {
     correctOption = 3;  
   }
   else if (questioncount === 5) {
-    text('How many bosses are in pantheon 5 in hollow knight?')
+    text('How many bosses are in pantheon 5 in hollow knight?', 50, 50)
     button1.html('46');
     button2.html('42');
     button3.html('38');
     button4.html('33');
     correctOption = 2;
   } else if (questioncount === 6) {
-    text('What is the lowest percentile u can beat silksong with [without major glitches]?')
+    text('What is the lowest percentile u can beat silksong with [without major glitches]?', 50, 50)
     button1.html('5%');
     button2.html('8%');
     button3.html('13%');
     button4.html('17%');
     correctOption = 1;
   } else if (questioncount === 7) {
-    text('What is the minimum amount of Dream Essence needed to get the Awoken Dream Nail??')
+    text('What is the minimum amount of Dream Essence needed to get the Awoken Dream Nail?', 50, 50)
     button1.html('2700');
     button2.html('1900');
     button3.html('1400');
-    button4.html('2200');
+    button4.html('2400');
     correctOption = 4;
   } else if (questioncount === 8) {
-    
-    button1.html('test1');
-    button2.html('test2');
-    button3.html('test3');
-    button4.html('test4');
-    correctOption = 2;
+    text('How many gauntlets are there in silksong?', 50, 50)
+    button1.html('59');
+    button2.html('54');
+    button3.html('49');
+    button4.html('44');
+    correctOption = 3;
   }
   else if (questioncount === 9) {
-    button1.html('test1');
-    button2.html('test2');
-    button3.html('test3');
-    button4.html('test4');
-    correctOption = 2;
+    text('And how many are there in hollow knight?', 50, 50)
+    button1.html('30');
+    button2.html('33');
+    button3.html('40');
+    button4.html('26');
+    correctOption = 1;
   } else if (questioncount === 10) {
-
-    button1.html('test1');
-    button2.html('test2');
-    button3.html('test3');
-    button4.html('test4');
+ text('Why is every hollow knight player afraid of Primal Aspids', 50, 50)
+    button1.html('Because they are annoying');
+    button2.html('because they have aimbot');
+    button3.html('because they are tanky');
+    button4.html('all three');
     correctOption = 2;
+  } else if (questioncount === 11) {
+    button1.hide();
+    button2.hide();
+    button3.hide();
+    button4.hide();
+textSize(50)
+    text('You scored ' + score + ' / 10', 250, 250)
   }
 
 
@@ -136,6 +157,7 @@ function draw() {
         button2pressed = false;
         button3pressed = false;
         button4pressed = false;
+        questionAnswered = false;
         resetTimer = 0;
         resetter = true;
       }, 2000);
@@ -153,7 +175,16 @@ function draw() {
 }
 
 function mousePressed() {
-  if (mouseX > 50 && mouseX < 150 && mouseY > 100 && mouseY < 150) {
+  if (questioncount === 0) {
+    questioncount = 1;
+    return;
+  }
+
+  if (questionAnswered) {
+    return;
+  }
+
+  if (mouseX > 100 && mouseX < 350 && mouseY > 200 && mouseY < 450) {
     if (correctOption === 4) {
       button1.style('background-color', buttoncolor1);
       button2.style('background-color', buttoncolor1);
@@ -180,10 +211,11 @@ function mousePressed() {
 
     }
     button1pressed = true;
+    questionAnswered = true;
     console.log('button1 clicked');
     console.log(score);
     console.log(button1pressed + '1');
-  } else if (mouseX > 175 && mouseX < 275 && mouseY > 100 && mouseY < 150) {
+  } else if (mouseX > 400 && mouseX < 650 && mouseY > 200 && mouseY < 450) {
     if (correctOption === 4) {
       button1.style('background-color', buttoncolor1);
       button2.style('background-color', buttoncolor1);
@@ -210,10 +242,11 @@ function mousePressed() {
       score -= 1
     }
     button2pressed = true;
+    questionAnswered = true;
     console.log('button2 clicked');
     console.log(score);
     console.log(button2pressed + '2');
-  } else if (mouseX > 300 && mouseX < 400 && mouseY > 100 && mouseY < 150) {
+  } else if (mouseX > 100 && mouseX < 350 && mouseY > 500 && mouseY < 750) {
     if (correctOption === 4) {
       button1.style('background-color', buttoncolor1);
       button2.style('background-color', buttoncolor1);
@@ -239,10 +272,11 @@ function mousePressed() {
       score -= 1
     }
     button3pressed = true;
+    questionAnswered = true;
     console.log('button3 clicked');
     console.log(score);
     console.log(button3pressed + '3');
-  } else if (mouseX > 425 && mouseX < 525 && mouseY > 100 && mouseY < 150) {
+  } else if (mouseX > 400 && mouseX < 650 && mouseY > 500 && mouseY < 750) {
     if (correctOption === 4) {
       button1.style('background-color', buttoncolor1);
       button2.style('background-color', buttoncolor1);
@@ -268,6 +302,7 @@ function mousePressed() {
       score -= 1
     }
     button4pressed = true;
+    questionAnswered = true;
     console.log(score);
     console.log(button4pressed + '4');
   }
@@ -284,12 +319,12 @@ function remakeButtons() {
   button2 = createButton(currentOptions[1]);
   button3 = createButton(currentOptions[2]);
   button4 = createButton(currentOptions[3]);
-  button1.size(100, 50);
-  button1.position(50, 100); // defining the variables of 'createButton' //
-  button2.size(100, 50);
-  button2.position(175, 100);
-  button3.size(100, 50);
-  button3.position(300, 100);
-  button4.size(100, 50);
-  button4.position(425, 100);
+  button1.size(250, 250);
+  button1.position(100, 200); // defining the variables of 'createButton' //
+  button2.size(250, 250);
+  button2.position(400, 200);
+  button3.size(250, 250);
+  button3.position(100, 500);
+  button4.size(250, 250);
+  button4.position(400, 500);
 }
