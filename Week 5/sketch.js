@@ -32,13 +32,13 @@ let correctSound;
 let incorrectSound;
 let correct = false;
 let incorrect = false;
-
+ // loads image and sound // 
 function preload() {
   HK = loadImage('HK.PNG');
   correctSound = loadSound('correct.mp3');
   incorrectSound = loadSound('incorrect.mp3');
 }
-
+ // function to check iff its correct or incorrect//
 function playAnswerFeedback() {
   if (correct === true) {
     correctSound.stop();
@@ -58,7 +58,7 @@ function playAnswerFeedback() {
 
 function setup() {
   createCanvas(1600, 1000);
-
+ // checks iff button6 is pressed // 
   remakeButtons();
   button6.mousePressed(() => {
     button6pressed = true;
@@ -72,15 +72,14 @@ function setup() {
 
 
 
-// make correct.mp3 / incorrect.mp3 play iff  a correct or incorrect answer is chosen, and make the volume for incorrect one lower // 
 
 
 
 function draw() {
-  image(HK, 0, 0, 1600, 1000)
+  image(HK, 0, 0, 1600, 1000) // puts the image//
   textSize(50)
 
-  if (questioncount === 0) {
+  if (questioncount === 0) { // hides all buttons except 6 // 
     button1.hide()
     button2.hide()
     button3.hide()
@@ -91,7 +90,7 @@ function draw() {
     return;
   }
   textSize(20)
-  button5.show()
+ // questions down below // 
   if (questioncount === 1) {
     button1.show()
     button2.show()
@@ -183,7 +182,7 @@ function draw() {
 
   }
 
-
+ // timer of 2000 milliseconds ( 2 seconds), that changes the buttons back to their original states.
   if (button1pressed || button2pressed || button3pressed || button4pressed) {
     if (resetTimer === 0) {
       resetTimer = setTimeout(() => {
@@ -202,7 +201,7 @@ function draw() {
     }
     return;
   }
-
+ // questioncounter
   if (resetter === true && resetTimer === 0) {
     resetter = false;
     questioncount++;
@@ -214,7 +213,7 @@ function mousePressed() {
     return;
   }
 
-
+ // a million checks down below //
   if (button6pressed && questioncount === 0) {
     button6pressed = false;
     questioncount = 1;
@@ -376,7 +375,7 @@ function mousePressed() {
     button4pressed = true;
     questionAnswered = true;
   }
-
+ // plays the sound according to iff its correct or incorrect after a mousepress // 
   if (correct || incorrect) {
     playAnswerFeedback();
   }
@@ -384,7 +383,7 @@ function mousePressed() {
 
 
 
-
+ // function that makes *All* buttons at once, and defined their text size, position, size, color, bordersize, bordercolor. //
 function remakeButtons() {
   let currentOptions = questions[0].options;
 
